@@ -10,7 +10,7 @@ export const login = (email, password) => async (dispatch) => {
     });
     // hitting node login api request
     const { data } = await axios.post(
-      `${server}/user/login`,
+      `http://192.168.0.5:8080/api/v1/user/login`,
       { email, password },
       {
         headers: {
@@ -18,6 +18,8 @@ export const login = (email, password) => async (dispatch) => {
         },
       }
     );
+
+
     dispatch({
       type: "logingSucess",
       payload: data,
@@ -36,8 +38,9 @@ export const register = (formData) => async (dispatch) => {
     dispatch({
       type: "registerRequest",
     });
-    // hitapi register
-    const { data } = await axios.post(`${server}/user/register`, formData, {
+
+
+    const {data}  = await axios.post(`http://192.168.0.5:8080/api/v1/user/register`, formData, {
       headers: {
         "Content-Type": "application/json",
       },

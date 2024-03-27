@@ -60,7 +60,7 @@ const PORT = process.env.PORT || 8080;
 //listen
 app.listen(PORT, () => {
   console.log(
-    `Server Running On PORT ${process.env.PORT} on ${process.env.NODE_ENV} Mode`
+    `Server Running On PORT ${process.env.PORT} on ${process.env.NODE_ENV} Mode `
       .bgMagenta.white
   );
 });

@@ -12,8 +12,8 @@ const ProductsCard = ({ p }) => {
   };
 
   //ADD TO CART
-  const handleAddToCart = () => {
-    alert("added to cart");
+  const handleScan = (id) => {
+    navigation.navigate("ProductBarScan", { _id: id });
   };
   return (
     <View>
@@ -30,8 +30,8 @@ const ProductsCard = ({ p }) => {
           >
             <Text style={styles.btnText}>Details</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnCart} onPress={handleAddToCart}>
-            <Text style={styles.btnText}>ADD TO CART</Text>
+          <TouchableOpacity style={styles.btnCart} onPress={()=>handleScan(p._id)}>
+            <Text style={styles.btnText}>Scan QR</Text>
           </TouchableOpacity>
         </View>
       </View>

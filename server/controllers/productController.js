@@ -5,17 +5,20 @@ import { getDataUri } from "./../utils/features.js";
 
 // GET ALL PRODUCTS
 export const getAllProductsController = async (req, res) => {
-  const { keyword, category } = req.query;
+  // const { keyword, category } = req.query;
   try {
-    const products = await productModel
-      .find({
-        name: {
-          $regex: keyword ? keyword : "",
-          $options: "i",
-        },
-        // category: category ? category : null,
-      })
-      .populate("category");
+    // const products = await productModel
+    //   .find({
+    //     name: {
+    //       $regex: keyword ? keyword : "",
+    //       $options: "i",
+    //     },
+    //     // category: category ? category : null,
+    //   })
+      // .populate("category");
+
+      const products = await productModel.find()
+
     res.status(200).send({
       success: true,
       message: "all products fetched successfully",
@@ -88,7 +91,7 @@ export const getSingleProductController = async (req, res) => {
 // CREATE PRODUCT
 export const createProductController = async (req, res) => {
   try {
-    const { name, description, price, category, stock } = req.body;
+    const { name, description, price, category,quantity } = req.body;
     // // validtion
     // if (!name || !description || !price || !stock) {
     //   return res.status(500).send({
@@ -96,26 +99,30 @@ export const createProductController = async (req, res) => {
     //     message: "Please Provide all fields",
     //   });
     // }
-    if (!req.file) {
-      return res.status(500).send({
-        success: false,
-        message: "please provide product images",
-      });
-    }
-    const file = getDataUri(req.file);
-    const cdb = await cloudinary.v2.uploader.upload(file.content);
-    const image = {
-      public_id: cdb.public_id,
-      url: cdb.secure_url,
-    };
+
+
+    // -----------------------
+    // if (!req.file) {
+    //   return res.status(500).send({
+    //     success: false,
+    //     message: "please provide product images",
+    //   });
+    // }
+    // const file = getDataUri(req.file);
+    // const cdb = await cloudinary.v2.uploader.upload(file.content);
+    // const image = {
+    //   public_id: cdb.public_id,
+    //   url: cdb.secure_url,
+    // };
 
     await productModel.create({
       name,
       description,
       price,
       category,
-      stock,
-      images: [image],
+      quantity,
+      warranty
+      // images: [image],
     });
 
     res.status(201).send({
@@ -173,6 +180,37 @@ export const updateProductController = async (req, res) => {
     });
   }
 };
+
+
+
+// Add Selling date
+export const addSellingDateController = async (req, res) =>{
+  try {
+    const product = await productModel.findById(req.params.id);
+    // const {dateOfSale} = req.body;
+    const dateOfSale = Date.now()
+    
+    if (!product) {
+      return res.status(400
+        ).json({success :false ,message:"Product not found"
+      }) ;    
+    }
+
+    if(dateOfSale) product.dateOfSale = dateOfSale;
+
+    await  product.save();
+    res.status(200).send({
+      success:true,
+      message: 'Added selling date',
+    })
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Error In Get UPDATE Products API",
+      error,
+    });
+  }
+}
 
 // UPDATE PRODUCT IMAGE
 export const updateProductImageController = async (req, res) => {

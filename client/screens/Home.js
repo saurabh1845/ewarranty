@@ -16,7 +16,7 @@ const Home = () => {
   }, [disptach]);
 
   return (
-    <Layout>
+    <Layout styles={{flex:1}}>
       <Header />
       <Categories />
       <Banner />

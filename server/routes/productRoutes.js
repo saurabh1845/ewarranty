@@ -10,6 +10,7 @@ import {
   productReviewController,
   updateProductController,
   updateProductImageController,
+  addSellingDateController
 } from "../controllers/productController.js";
 import { singleUpload } from "../middlewares/multer.js";
 
@@ -28,7 +29,10 @@ router.get("/top", getTopProductsController);
 router.get("/:id", getSingleProductController);
 
 // CREATE PRODUCT
-router.post("/create", isAuth, isAdmin, singleUpload, createProductController);
+router.post("/create", createProductController);
+// router.post("/create", isAuth, isAdmin, singleUpload, createProductController);
+
+router.put('/add-sell-date/:id',addSellingDateController)
 
 // UPDATE PRODUCT
 router.put("/:id", isAuth, isAdmin, updateProductController);

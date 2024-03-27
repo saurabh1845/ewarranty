@@ -20,11 +20,11 @@ const Login = ({ navigation }) => {
   // hooks
   const dispatch = useDispatch();
   // global state
-
   const loading = useReduxStateHook(navigation, "home");
 
   // login function
   const handleLogin = () => {
+
     if (!email || !password) {
       return alert("Please add email or password");
     }

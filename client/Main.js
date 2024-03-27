@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./screens/Home";
 import About from "./screens/About";
 import ProductDetails from "./screens/ProductDetails";
+import ProductBarScan from "./components/Products/ProductBarScan"
 import Cart from "./screens/Cart";
 import Checkout from "./screens/Checkout";
 import Payments from "./screens/Payments";
@@ -48,6 +49,7 @@ export default function Main() {
             }}
           />
           <Stack.Screen name="productDetails" component={ProductDetails} />
+          <Stack.Screen name="ProductBarScan" component={ProductBarScan} />
           <Stack.Screen name="checkout" component={Checkout} />
           <Stack.Screen name="myorders" component={MyOrders} />
           <Stack.Screen name="profile" component={Profile} />

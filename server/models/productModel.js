@@ -38,33 +38,45 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: [true, "product price is required"],
     },
-    stock: {
-      type: Number,
-      required: [true, "product stock required"],
-    },
-    // quantity: {
+    // stock: {
     //   type: Number,
-    //   required: [true, "product quantity required"],
+    //   required: [true, "product stock required"],
     // },
+    quantity: {
+      type: Number,
+      required: [true, "product quantity required"],
+    },
     category: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "Category",
     },
-    images: [
-      {
-        public_id: String,
-        url: String,
-      },
-    ],
-    reviews: [reviewSchema],
-    rating: {
-      type: Number,
-      default: 0,
+    imageUrl:{
+      type: String,
+      // requied: true
     },
-    numReviews: {
-      type: Number,
-      default: 0,
+    warranty:{
+      type:Number,
+      default:0
     },
+    dateOfSale:{
+      type:Date,
+      
+    }
+    // images: [
+    //   {
+    //     public_id: String,
+    //     url: String,
+    //   },
+    // ],
+    // reviews: [reviewSchema],
+    // rating: {
+    //   type: Number,
+    //   default: 0,
+    // },
+    // numReviews: {
+    //   type: Number,
+    //   default: 0,
+    // },
   },
   { timestamps: true }
 );

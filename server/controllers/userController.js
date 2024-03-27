@@ -1,8 +1,11 @@
 import userModel from "../models/userModel.js";
 import cloudinary from "cloudinary";
 import { getDataUri } from "../utils/Features.js";
+
+
 export const registerController = async (req, res) => {
   try {
+   
     const { name, email, password, address, city, country, phone, answer } =
       req.body;
     // validation
@@ -59,6 +62,7 @@ export const registerController = async (req, res) => {
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
+
     //validation
     if (!email || !password) {
       return res.status(500).send({
@@ -66,7 +70,7 @@ export const loginController = async (req, res) => {
         message: "Please Add Email OR Password",
       });
     }
-    // check user
+
     const user = await userModel.findOne({ email });
     //user valdiation
     if (!user) {
